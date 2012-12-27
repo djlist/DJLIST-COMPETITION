@@ -1,0 +1,145 @@
+$background: #FFFFFF;
+$border: #D3D3D3;
+$button: #EBEBEB;
+$control: black;
+$headers: black;
+$opaque: black;
+$primary: black;
+$radius: 0px;
+$text: #555555;
+$thick: 3px;
+
+@import "compass/css3";
+
+body{
+  background: $background;
+  color: $text;
+  font: 12px Futura, Helvetica, sans-serif;
+
+  // Main Styles
+
+  a{ color: $primary; text-decoration: none; }
+  h1, h2, h3, h4{ color: $headers; font-weight: normal; }
+  h1{ font-size: 24px; }
+  h2{ font-size: 18px; }
+  h3{ font-size: 14px; }
+  hr{ border: solid transparentize($border, 0.5); border-width: 1px 0 0; &.large{ border-width: $thick 0 0; } }
+  em{ color: $border; font-style: normal; }
+
+  // Forms
+
+  input, textarea, select{
+    background: transparent;
+    border: 1px solid transparentize($border, 0.5);
+    &:focus{ border-color: $border; }
+  }
+
+  // Tracks & Comments
+
+  .track, .comment{ border-top: 1px solid transparentize($border, 0.5); }
+  .about .comment{ border-bottom: 1px solid transparentize($border, 0.5); }
+  .owner{ background: transparentize($border, 0.75); }
+
+  // Header , Footer, & Caption
+
+  .header, .footer{
+    ul li{ border-style: solid; }
+    ul:first-child li{ border-width: 0 1px 0 0; &:last-child{ border: none; } }
+    ul:last-child li{ border-width: 0 0 0 1px; &:first-child{ border: none; } }
+  }
+
+  .header{
+    $color: lighten($opaque, 25%);
+    @include background(linear-gradient($color, $opaque));
+    a{ color: $background; }
+    li{ color: $color; border-color: $color; }
+    div.logo{ background: image-url("logo.png"); border-right: 1px solid $color; }
+  }
+
+  .footer{
+    border-top: $thick solid $opaque;
+    li{ border-color: $border; }
+  }
+
+  .caption{ background: $opaque; *{ color: $background; } }
+
+  // Prizes
+
+  .prizes ul{ list-style: square; }
+
+  // Voting
+
+  .vote{
+    border: 1px solid $border;
+    .votes > div{ color: $primary; }
+    .votes > a{
+      @include background(linear-gradient($button, $background));
+      border-left: 1px solid $border;
+      color: $text;
+      &:hover{ color: $primary; }
+      &.voted{ background: $border; color: $background; }
+    }
+  }
+
+  // Player
+
+  div.player{
+    border: 1px solid $border;
+    .controls{
+      a{
+        @include background(linear-gradient($control, $background));
+        @include border-radius(100px);
+        @include box-sizing(border-box);
+        border: $thick solid $control;
+      }
+      .play{ border-color: transparent transparent transparent $control; }
+      .pause{ border-color: $control; }
+    }
+    .time{
+      border-left: 1px solid $border;
+      @include background-image(linear-gradient(#D3D3D3, lighten(#D3D3D3, 10%) 40%, lighten(#D3D3D3, 10%) 60%, #D3D3D3));
+      .loaded{ @include background-image(linear-gradient(#959595, lighten(#959595, 10%) 40%, lighten(#959595, 10%) 60%, #959595)); }
+      .played{ @include background-image(linear-gradient($primary, lighten($primary, 10%) 40%, lighten($primary, 10%) 60%, $primary)); }
+    }
+  }
+
+  // Reminder
+
+  .reminder{ border-top: 1px solid transparentize($border, 0.5); }
+
+  // Buttons
+
+  .button, .pagination a{
+    @include background(linear-gradient($background, $button));
+    border: 1px solid $border;
+    color: $text;
+    &:hover{ color: $primary; }
+    &.selected{ background: $border; color: $background; }
+    &:focus{ border-color: darken($border, 10%); }
+    &.disabled{ color: $border; }
+  }
+
+  // Rounding & Transition
+
+  select, input, textarea, .vote, .button{ @include border-radius($radius); }
+  input, textarea, .votes > a, .button{ @include single-transition(all 1s); }
+
+  // Chosen Select
+
+  .chzn-container ul.chzn-results li.highlighted {
+    background: $border;
+  }
+
+  // Mobile Devices
+
+  // iPhone
+  @media only screen and (max-width: 480px){
+    h1{ font-size: 15px; }
+    h2{ font-size: 14px; }
+    .header ul:last-child li:nth-child(2n){ border: none; }
+  }
+
+  // iPad
+  @media only screen and (max-width: 767px){ }
+
+}

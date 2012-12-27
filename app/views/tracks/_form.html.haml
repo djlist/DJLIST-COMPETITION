@@ -1,0 +1,18 @@
+= form_for @track do |f|
+
+  - if @track.errors.any?
+    #error_explanation
+      %h2 #{pluralize(@track.errors.count, "error")} prohibited this track from being saved:
+      %ul
+      - @track.errors.full_messages.each do |msg|
+        %li= msg
+
+  - cache "user_tracks_#{current_user.id}" do
+
+    %p= f.select :tid, current_user.soundcloud_tracks.collect {|t| [ t["title"], t["id"] ]}, {:prompt => "Select a Track..."}, {:class => "chzn-select"}
+
+  %p
+    %input#track_agreed(name="track[agreed]" type="checkbox" value=0)
+    I agree to the #{link_to "Contest Rules", @competition.rules, :style => "text-decoration:underline", :target => "_blank"}.
+
+  %p= link_to "Submit Track", nil, :class => "button submit disabled"

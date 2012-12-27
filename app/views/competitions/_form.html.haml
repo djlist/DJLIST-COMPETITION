@@ -1,0 +1,59 @@
+= form_for @competition do |f|
+
+  - if @competition.errors.any?
+    #error_explanation
+      %h2 #{pluralize(@competition.errors.count, "error")} prohibited this competition from being saved:
+      %ul
+      - @competition.errors.full_messages.each do |msg|
+        %li= msg
+
+  %p
+    = f.label :host
+    = f.text_field :host
+
+  %p
+    = f.label :title
+    = f.text_field :title
+
+  %div.clearfix
+    .fl(style="width:50%")
+      = f.label :start_date
+      = f.datetime_select :start_date
+    .fr(style="width:50%")
+      = f.label :end_date
+      = f.datetime_select :end_date
+
+  %p
+    = f.label :intro
+    = f.text_area :intro, :rows => 5
+
+  %p
+    = f.label :description
+    = f.text_area :description, :rows => 10
+
+  %p
+    = f.label :prizes
+    = f.text_area :prizes, :rows => 5
+
+  %p
+    = f.label :about
+    = f.text_area :about, :rows => 10
+
+  %p
+    = f.label :group, "Group"
+    = f.select :group, current_user.soundcloud_groups.collect {|g| [ g.name, g.id ]}, {:prompt => 'Select a Group...'}, {:style => "width:100%"}
+
+  %p
+    = f.label :download, "Stems Download URL"
+    = f.text_field :download
+
+  %p
+    = f.label :rules, "Rules URL"
+    = f.text_field :rules
+    
+  %p
+    = f.label :recording, "Record Submissions"
+    = f.select :recording, {'True' => true, 'False' => false}, {}, {:style => "width:100%"}
+
+  %p
+    %a.button.submit Update
